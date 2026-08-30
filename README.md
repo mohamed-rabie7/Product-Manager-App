@@ -39,4 +39,4 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
-Made with ❤️ by [Mohamed Rabie](https://github.com/m2437724-source)
+Made with ❤️ by [Mohamed Rabie](https://github.com/mohamed-rabie7)
