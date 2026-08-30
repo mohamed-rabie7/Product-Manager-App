@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const toggle = document.getElementById("toggle");
 const skipLink = document.getElementById("skipLink");
 const shortcuts = document.getElementById("shortcuts");
@@ -775,5 +774,4 @@ shortcutsModal.addEventListener("click", function (event) {
     }
 });
 
->>>>>>> 1d323405066b31eca0a487d53db4c15d4a874e6e
 displayProducts();
