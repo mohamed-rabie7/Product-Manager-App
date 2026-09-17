@@ -2,6 +2,7 @@ const toggle = document.getElementById("toggle");
 const skipLink = document.getElementById("skipLink");
 const shortcuts = document.getElementById("shortcuts");
 const app = document.getElementById("app");
+const form = document.getElementById("form");
 const productName = document.getElementById("productName");
 const productPrice = document.getElementById("productPrice");
 const productQuantity = document.getElementById("productQuantity");
@@ -27,7 +28,7 @@ function saveProducts() {
     localStorage.setItem("products", JSON.stringify(products));
 }
 
-//Save the input fields
+//Save the input fields and clear invalid messages
 const savedInputs = localStorage.getItem("inputs");
 
 if (savedInputs !== null) {
@@ -47,9 +48,27 @@ function saveInputs() {
     localStorage.setItem("inputs", JSON.stringify(inputs));
 }
 
-productName.addEventListener("input", saveInputs);
-productPrice.addEventListener("input", saveInputs);
-productQuantity.addEventListener("input", saveInputs);
+productName.addEventListener("input", function () {
+    saveInputs();
+    this.setCustomValidity("");
+    this.classList.remove("invalid");
+    validation.textContent = "";
+});
+
+productPrice.addEventListener("input", function () {
+    saveInputs();
+    this.setCustomValidity("");
+    this.classList.remove("invalid");
+    validation.textContent = "";
+});
+
+productQuantity.addEventListener("input", function () {
+    saveInputs();
+    this.setCustomValidity("");
+    this.classList.remove("invalid");
+    validation.textContent = "";
+});
+
 window.addEventListener("beforeunload", saveInputs);
 
 //Display Products
@@ -101,58 +120,6 @@ productList.addEventListener("click", function (e) {
     }
 });
 
-//Save product button
-saveBtn.addEventListener("click", function () {
-    const product = {
-        name: productName.value.trim(),
-        price: productPrice.value.trim(),
-        quantity: productQuantity.value.trim()
-    };
-
-    if (product.name == "" && product.price == "" && product.quantity == "") {
-        validation.textContent = "Please Enter The Product Details";
-        message.textContent = "";
-        return;
-    }
-
-    if (product.name == "") {
-        validation.textContent = "Please Enter The Product Name";
-        message.textContent = "";
-        return;
-    } else if (product.price == "") {
-        validation.textContent = "Please Enter The Product Price";
-        message.textContent = "";
-        return;
-    } else if (product.quantity == "") {
-        validation.textContent = "Please Enter The Product Quantity";
-        message.textContent = "";
-        return;
-    }
-
-    if (editIndex === null) {
-        products.push(product);
-        message.textContent = "Product Added Successfully";
-    } else {
-        products[editIndex] = product;
-        editIndex = null;
-        saveBtn.textContent = "Save Product";
-        message.textContent = "Product Updated Successfully";
-        validation.textContent = "";
-    }
-
-    saveProducts();
-    saveEditIndex(null);
-    displayProducts();
-
-    productName.value = "";
-    productPrice.value = "";
-    productQuantity.value = "";
-
-    validation.textContent = "";
-
-    document.querySelectorAll(".edit, .del").forEach(btn => btn.disabled = false);
-});
-
 //Edit Button
 function edit(index) {
     document.querySelectorAll(".edit, .del").forEach(btn => btn.disabled = true);
@@ -182,7 +149,7 @@ const getEditIndex = localStorage.getItem("editIndex");
 if (getEditIndex !== null) {
     editIndex = JSON.parse(getEditIndex);
 
-    if (editIndex !== null) {
+    if (editIndex !== null && products[editIndex]) {
         setTimeout(() => edit(editIndex), 0);
     }
 }
@@ -202,9 +169,78 @@ function del(index) {
     validation.textContent = "";
 }
 
+//Add product and validate
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const product = {
+        name: productName.value.trim(),
+        price: productPrice.value.trim(),
+        quantity: productQuantity.value.trim()
+    };
+
+    if (product.name == "" && product.price == "" && product.quantity == "") {
+        validation.textContent = "Please Enter The Product Details";
+        message.textContent = "";
+        productName.setCustomValidity("Please enter a product name");
+        productName.reportValidity();
+        productName.classList.add("invalid");
+        return;
+    }
+
+    if (product.name == "") {
+        validation.textContent = "Please Enter The Product Name";
+        message.textContent = "";
+        productName.setCustomValidity("Please enter a product name");
+        productName.reportValidity();
+        productName.classList.add("invalid");
+        return;
+    } else if (product.price == "") {
+        validation.textContent = "Please Enter The Product Price";
+        message.textContent = "";
+        productPrice.setCustomValidity("Please enter the product price (Decimal)");
+        productPrice.reportValidity();
+        productPrice.classList.add("invalid");
+        return;
+    } else if (product.quantity == "") {
+        validation.textContent = "Please Enter The Product Quantity";
+        message.textContent = "";
+        productQuantity.setCustomValidity("Please enter the product quantity (Integer)");
+        productQuantity.reportValidity();
+        productQuantity.classList.add("invalid");
+        return;
+    }
+
+    if (editIndex === null) {
+        products.unshift(product);
+        message.textContent = "Product Added Successfully";
+    } else {
+        products[editIndex] = product;
+        editIndex = null;
+        saveBtn.textContent = "Save Product";
+        message.textContent = "Product Updated Successfully";
+        validation.textContent = "";
+    }
+
+    saveProducts();
+    saveEditIndex(null);
+    displayProducts();
+
+    productName.value = "";
+    productPrice.value = "";
+    productQuantity.value = "";
+
+    validation.textContent = "";
+
+    document.querySelectorAll(".edit, .del").forEach(btn => btn.disabled = false);
+    
+    productName.focus();
+});
+
 //Keyboard navigation
 productName.addEventListener("keydown", function (event) {
     if (event.code === "Enter") {
+        event.preventDefault();
         productPrice.focus();
     }
 
@@ -213,14 +249,8 @@ productName.addEventListener("keydown", function (event) {
 
 productPrice.addEventListener("keydown", function (event) {
     if (event.code === "Enter") {
+        event.preventDefault();
         productQuantity.focus();
-    }
-});
-
-productQuantity.addEventListener("keydown", function (event) {
-    if (event.code === "Enter") {
-        saveBtn.click();
-        productName.focus();
     }
 });
 

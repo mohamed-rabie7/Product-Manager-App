@@ -1,5 +1,5 @@
 html {
-    font-size: 100%;
+    font-size: clamp(0.85rem, 0.49rem + 0.5vw, 1.8rem);
 }
 
 body {
@@ -34,7 +34,7 @@ body {
 #toggle:hover {
     background-color: #222;
     transform: translateY(-0.25em);
-    box-shadow: 0 0 0.8em rgba(0, 0, 0, 1);
+    box-shadow: 0 0 0.8em rgba(0, 0, 0, 1), 0 0 0.8em rgba(0, 0, 0, 0.2);
 }
 
 #toggle:active {
@@ -90,7 +90,7 @@ body {
 
 #shortcuts:hover {
     background-color: #153eaa;
-    box-shadow: 0.2em 0.25em 0.6em rgba(0, 0, 0, 0.6);
+    box-shadow: 0.2em 0.25em 0.7em rgba(0, 0, 0, 0.6);
     transform: translateY(-0.25em);
 }
 
@@ -102,17 +102,17 @@ body {
 #app {
     background-color: white;
     padding: 2.64rem 2.625rem 2.625rem 2.625rem;
-    width: 65%;
+    width: clamp(320px, 65%, 1500px);
     margin-top: 9rem;
     margin-bottom: 0.75rem;
-    border-radius: 1.125rem;
+    border-radius: 1.15rem;
     box-shadow: 0.625rem 0.7rem 0.8rem rgba(0, 0, 0, 0.5);
     transition: 0.25s ease-in-out;
 }
 
 #app:hover {
-    transform: translateY(-0.4rem);
-    box-shadow: 0.9375rem 1.125rem 1.7rem rgba(0, 0, 0, 0.45);
+    transform: translateY(-0.375rem);
+    box-shadow: 0.9375rem 1.125rem 1.7rem rgba(0, 0, 0, 0.4);
 }
 
 h1 {
@@ -128,46 +128,20 @@ h2 {
     letter-spacing: 0.01em;
 }
 
-h3 {
-    font-size: 2rem;
-    margin-top: auto;
-    margin-bottom: 2.5rem;
-    letter-spacing: 0.014em;
-}
-
-.long {
-    font-size: 1.75rem;
-}
-
-.upperCase {
-    letter-spacing: 0.04rem;
-}
-
-.huge {
-    font-size: 1.5rem;
-    letter-spacing: 0.016em;
-}
-
-h4 {
-    font-size: 1.3125rem;
-    margin-top: -0.625rem;
-    letter-spacing: 0.02em;
-}
-
 #subtitle {
     text-align: center;
-    font-size: 1.5rem;
-    margin-top: 4.1875rem;
+    font-size: 1.8rem;
+    margin-top: 5rem;
     letter-spacing: 0.016em;
     font-weight: 500;
 }
 
 #form {
     background-color: #f4f7fc;
-    padding: 1.5625rem 1.875rem;
-    margin-top: 2.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0.0625rem 0.0625rem 0.375rem rgba(0, 0, 0, 0.5);
+    padding: 1.875rem 2.25rem 1.5rem 2.25rem;
+    margin-top: 3rem;
+    border-radius: 0.9rem;
+    box-shadow: 0.07rem 0.07rem 0.4125rem rgba(0, 0, 0, 0.5);
 }
 
 #input {
@@ -179,8 +153,8 @@ input {
     width: 100%;
     box-sizing: border-box;
     padding: 0.5555em;
-    margin-top: 0.9375rem;
-    font-size: 1.125rem;
+    margin-top: 1.125rem;
+    font-size: 1.35rem;
     border: 0.0555em solid #ccc;
     border-radius: 0.4444em;
 }
@@ -202,26 +176,31 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+input.invalid {
+    border-color: #e12;
+    background-color: #fdd;
+}
+
 #saveBtn {
     background-color: #1d4fcd;
     color: white;
     border: none;
     border-radius: 0.625em;
     padding: 0.75em 1.125em;
-    margin-top: 1.25rem;
-    font-size: 1rem;
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 500;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.07em !important;
     cursor: pointer;
     transition: 0.25s ease;
-    box-shadow: 0.125em 0.125em 0.375em rgba(0, 0, 0, 0.7);
+    box-shadow: 0.1em 0.125em 0.375em rgba(0, 0, 0, 0.7);
     letter-spacing: 0.05em;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 #saveBtn:hover {
     background-color: #153eaa;
-    transform: translateY(-4px);
+    transform: translateY(-0.2em);
     box-shadow: 0.25em 0.3125em 0.625em rgba(0, 0, 0, 0.6);
 }
 
@@ -237,45 +216,51 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #validation {
-    margin-top: 1rem;
-    font-size: 1.5rem;
+    margin-top: 1.6rem;
+    font-size: 1.8rem;
     font-weight: bold;
     color: #e12;
-    letter-spacing: 0.016em;
+    letter-spacing: 0.02em;
 }
 
 #message {
     color: #1d4fcd;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    margin-top: 1.875rem;
-    letter-spacing: 0.016em;
+    margin-top: 2.25rem;
+    letter-spacing: 0.05em;
 }
 
 .product {
     background-color: #f4f6f9;
-    margin-top: 2.5rem;
-    padding: 1.5625rem 1.5625rem 1.875rem 1.5625rem;
-    box-shadow: 0.0625rem 0.0625rem 0.3125rem rgba(0, 0, 0, 0.5);
-    border-radius: 0.75rem;
+    margin-top: 3rem;
+    padding: 1.875rem 1.875rem 2.25rem 1.875rem;
+    box-shadow: 0.075rem 0.075rem 0.375rem rgba(0, 0, 0, 0.5);
+    border-radius: 0.9rem;
     overflow: hidden;
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
 
 .product.editing {
-    border: 0.1875rem solid #1d4fcd;
-    box-shadow: 0 0 0.9375rem rgba(29, 79, 205, 0.5);
+    border: 0.225rem solid #1d4fcd;
+    box-shadow: 0 0 1.125rem rgba(29, 79, 205, 0.5);
 }
 
 .product h3 {
-    font-size: 2rem;
+    font-size: 2.4rem;
     margin-top: auto;
-    margin-bottom: 2.5rem;
-    letter-spacing: 0.014em;
+    margin-bottom: 3rem;
+    letter-spacing: 0.015em;
     max-width: 100%;
     word-wrap: break-word;
     overflow-wrap: break-word;
+}
+
+.product h4 {
+    font-size: 1.575rem;
+    margin-top: -1rem;
+    letter-spacing: 0.02em;
 }
 
 .edit {
@@ -284,7 +269,7 @@ input[type="number"]::-webkit-outer-spin-button {
     border: none;
     border-radius: 0.5555em;
     padding: 0.5em 0.8888em;
-    font-size: 1.125rem;
+    font-size: 1.35rem;
     font-weight: 500;
     font-family: 'Arimo', Arial, Helvetica, sans-serif;
     letter-spacing: 0.05em;
@@ -310,8 +295,8 @@ input[type="number"]::-webkit-outer-spin-button {
     border: none;
     border-radius: 0.5555em;
     padding: 0.5em 0.8888em;
-    margin-left: 0.1666rem;
-    font-size: 1.125rem;
+    margin-left: 0.2rem;
+    font-size: 1.35rem;
     font-weight: 500;
     font-family: 'Arimo', Arial, Helvetica, sans-serif;
     letter-spacing: 0.05em;
@@ -338,7 +323,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .edit:disabled:hover, .del:disabled:hover {
-    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.6);
+    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.6) !important;
     transform: none !important;
 }
 
@@ -351,15 +336,15 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 *:focus-visible {
-    outline: 0.1875rem solid #1d4fcd;
-    outline-offset: 0.125rem;
-    border-radius: 0.625rem;
+    outline: 0.225rem solid #1d4fcd;
+    outline-offset: 0.15rem;
+    border-radius: 0.75rem;
 }
 
 input:focus-visible {
     outline: 0.125rem solid #1d4fcd;
     border-radius: 0.5rem !important;
-    box-shadow: 0 0 0 0.25rem rgba(29, 79, 205, 0.1)
+    box-shadow: 0 0 0 0.25rem rgba(29, 79, 205, 0.15);
 }
 
 button:focus-visible {
@@ -377,7 +362,7 @@ footer {
 }
 
 #footer {
-    font-family: 'Arimo';
+    font-family: 'Inter';
     font-size: 1.3rem;
     font-weight: 500;
     letter-spacing: 0.05em;
@@ -389,7 +374,7 @@ kbd {
     border: 0.0625em solid #ccc;
     border-radius: 0.25em;
     padding: 0.125em 0.5em;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     font-family: monospace;
     box-shadow: 0.0625em 0.0625em 0.125em rgba(0, 0, 0, 0.3);
@@ -437,9 +422,9 @@ kbd {
 
 #modalContent {
     background-color: white;
-    padding: 3rem;
+    padding: 3.5rem;
     border-radius: 1rem;
-    max-width: 560px;
+    max-width: 600px;
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
@@ -450,14 +435,14 @@ kbd {
 
 #closeModal {
     position: absolute;
-    top: 1rem;
-    right: 1.25rem;
+    top: 1.1rem;
+    right: 1.375rem;
     font-size: 2rem;
     font-weight: bold;
     background: none;
     border: none;
     color: #777;
-    padding: 0.25rem 0.85rem;
+    padding: 0.3rem 0.9rem;
     border-radius: 0.375rem;
     cursor: pointer;
     transition: 0.25s ease;
@@ -466,23 +451,27 @@ kbd {
 #closeModal:hover {
     background-color: #ff5050;
     color: black;
-    transform: translateY(-0.25rem);
-    box-shadow: 0.2rem 0.3rem 0.6rem rgba(0, 0, 0, 0.5);
+    transform: translateY(-0.15em);
+    box-shadow: 0.15rem 0.25rem 0.5rem rgba(0, 0, 0, 0.4);
 }
 
 #closeModal:active {
+    background-color: #ff5050;
+    color: black !important;
     transform: scale(0.95);
     box-shadow: 0.1rem 0.15rem 0.4rem rgba(0, 0, 0, 0.4);
 }
 
 #closeModal:focus-visible {
+    transform: translateY(-0.15em);
     outline: 0.125rem solid #1d4fcd;
     background-color: #ff5050;
     color: black;
 }
 
 #shortcutsModal h2 {
-    margin-top: 0;
+    font-size: 3.135rem;
+    margin-top: 1rem;
     color: #1d4fcd;
     letter-spacing: 0.02em;
     text-align: center;
@@ -491,13 +480,13 @@ kbd {
 #shortcutsModal table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1.25rem 0 0.5rem 0;
+    margin: 1.4rem 0 0.6rem 0;
 }
 
 #shortcutsModal th {
     text-align: center;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #444;
     padding-bottom: 0.5em;
     border-bottom: 0.25em solid #ddd;
@@ -508,7 +497,7 @@ kbd {
 #shortcutsModal td {
     padding: 0.625em 0;
     border-bottom: 0.1em solid #eee;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 #shortcutsModal td kbd {
@@ -520,15 +509,15 @@ kbd {
 }
 
 #modalFooter {
-    margin-top: 1.25rem;
-    font-size: 1rem;
+    margin-top: 1.4rem;
+    font-size: 1.1rem;
     color: #555;
     text-align: center;
     padding-top: 0.85em;
 }
 
 #modalFooter kbd {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 @keyframes fadeIn {
@@ -586,11 +575,11 @@ body.darkMode #toggle:active {
 
 body.darkMode #app {
     background-color: #1e1e1e;
-    box-shadow: 0.625em 0.625em 0.75em rgba(0, 0, 0, 0.8);
+    box-shadow: 0.6em 0.5em 0.7em rgba(0, 0, 0, 0.8);
 }
 
 body.darkMode #app:hover {
-    box-shadow: 0.9375em 1.125em 1.875em rgba(0, 0, 0, 0.8);
+    box-shadow: 0.9em 1.1em 1.8em rgba(0, 0, 0, 0.8);
 }
 
 body.darkMode #form, 
@@ -600,7 +589,7 @@ body.darkMode .product {
 }
 
 body.darkMode .product.editing {
-    box-shadow: 0 0 0.9375rem rgba(29, 79, 205, 0.5);
+    box-shadow: 0 0 0.9rem rgba(29, 79, 205, 0.4);
 }
 
 body.darkMode h1, 
@@ -640,7 +629,7 @@ body.darkMode *:focus-visible {
 }
 
 body.darkMode button:focus-visible {
-    box-shadow: 0 0 0 0.25rem rgba(71, 114, 244, 0.3) !important;
+    box-shadow: 0 0 0 0.25rem rgba(71, 114, 244, 0.2) !important;
 }
 
 body.darkMode #shortcuts {
@@ -674,6 +663,11 @@ body.darkMode #closeModal {
 body.darkMode #closeModal:hover {
     color: black;
     background-color: #ff5050;
+    box-shadow: 0.15rem 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+body.darkMode #closeModal:active {
+    box-shadow: 0.1rem 0.15rem 0.4rem rgba(0, 0, 0, 0.5);
 }
 
 body.darkMode #closeModal:focus-visible {
@@ -705,122 +699,4 @@ body.darkMode #shortcutsModal #modalFooter kbd {
 body.darkMode #modalFooter {
     border-top-color: #333;
     color: #999;
-}
-
-@media (max-width: 73.75em) {
-    #toggle {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-    }
-}
-
-@media(max-width: 48em) {
-    #toggle {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-    }
-
-    #help {
-        top: 20px;
-        left: 20px;
-    }
-
-    #app {
-        padding: 1.25rem;
-        margin-top: 60px;
-        width: 90%;
-    }
-
-    h1 {
-        font-size: 35px;
-    }
-
-    h2 {
-        font-size: 32px;
-    }
-
-    h3 {
-        font-size: 30px;
-    }
-
-    h4 {
-        font-size: 22px;
-        margin-top: -15px;
-    }
-
-    #subtitle {
-        font-size: 24px;
-    }
-
-    #message {
-        font-size: 22px;
-        text-align: center;
-    }
-
-
-}
-
-@media (max-width: 43.75em) {
-    #app {
-        padding: 20px;
-        margin-top: 100px;
-        width: 90%;
-    }
-
-    #app:hover {
-        box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.6);
-        transform: none;
-    }
-
-    h1 {
-        font-size: 35px;
-    }
-
-    h2 {
-        font-size: 32px;
-    }
-
-    h3 {
-        font-size: 30px;
-    }
-
-    h4 {
-        font-size: 22px;
-        margin-top: -15px;
-    }
-
-    #subtitle {
-        font-size: 24px;
-    }
-
-    #message {
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: center;
-        gap: 10px;
-        font-size: 18px;
-    }
-
-    #validation {
-        font-size: 16px;
-        margin-top: 10px;
-        text-align: center;
-        width: 100%;
-    }
-
-    #saveBtn {
-        margin-right: 20px;
-        font-size: 15px;
-        width: 100%;
-    }
-
-    .edit {
-        font-size: 17px;
-    }
-
-    .del {
-        font-size: 17px;
-    }
 }

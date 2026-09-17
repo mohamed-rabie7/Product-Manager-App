@@ -19,30 +19,32 @@
         <button type="button" id="shortcuts" aria-label="Keyboard shortcuts" title="Keyboard shortcuts">⌨️ Shortcuts</button>
         <button type="button" id="toggle" class="toggle" aria-pressed="false">Dark Mode</button>
 
-        <div id="app">
-            <h1>Product Manager</h1>
-            <p id="subtitle">Save and manage your products using the web browser local storage</p>
+        <main id="app">
+            <header>
+                <h1>Product Manager</h1>
+                <p id="subtitle">Save and manage your products using the web browser local storage</p>
+            </header>
             
-            <div id="form">
+            <form id="form" novalidate>
                 <div id="input">
-                    <input type="text" id="productName" placeholder="Product Name" maxlength="60">
-                    <input type="number" id="productPrice" placeholder="Product Price" min="0" step="0.01">
-                    <input type="number" id="productQuantity" placeholder="Product Quantity" min="0" step="1">
+                    <input type="text" id="productName" placeholder="Product Name" aria-label="Product Name" maxlength="60" enterkeyhint="next" required>
+                    <input type="number" inputmode="decimal" id="productPrice" placeholder="Product Price" aria-label="Product Price" min="0" step="0.01" enterkeyhint="next" required>
+                    <input type="number" inputmode="numeric" id="productQuantity" placeholder="Product Quantity" aria-label="Product Quantity" min="0" step="1" enterkeyhint="done" required>
                 </div>
 
                 <div id="messages">
-                    <button type="button" id="saveBtn" aria-label="Save Product">Save Product</button>
+                    <button type="submit" id="saveBtn" aria-label="Save Product">Save Product</button>
                     <div id="validation" role="alert" aria-live="polite"></div>
                 </div>
 
                 <p id="message" role="status" aria-live="polite"></p>
-            </div>
+            </form>
 
             <div class="productBox">
                 <h2>Products:</h2>
                 <div id="productList"></div>
             </div>
-        </div>
+        </main>
 
         <div id="shortcutsModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
             <div id="modalContent">
