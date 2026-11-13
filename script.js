@@ -9,6 +9,7 @@ const productQuantity = document.getElementById("productQuantity");
 const saveBtn = document.getElementById("saveBtn");
 const validation = document.getElementById("validation");
 const message = document.getElementById("message");
+const search = document.getElementById("searchInput");
 const productList = document.getElementById("productList");
 const shortcutsModal = document.getElementById("shortcutsModal");
 const modalContent = document.getElementById("modalContent");
@@ -73,30 +74,52 @@ window.addEventListener("beforeunload", saveInputs);
 
 //Display Products
 function displayProducts() {
+    const searchValue = search.value.toLowerCase().trim();
+    let filtered = searchValue === "" ? [...products] : products.filter(product => product.name.toLowerCase().includes(searchValue));
+    
+    if (searchValue !== "") {
+        filtered.sort((a, b) => {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+
+            if (nameA === searchValue) return -1;
+            if (nameB === searchValue) return 1;
+
+            if (nameA.startsWith(searchValue) && !nameB.startsWith(searchValue)) return -1;
+            if (!nameA.startsWith(searchValue) && nameB.startsWith(searchValue)) return 1;
+
+            return 0;
+        });
+    }
+    
     if (products.length === 0) {
         productList.innerHTML = `
-        <p style="text-align:center; color:#777; font-size: 22px;">
+        <p style="text-align:center; color:#777; font-size: 1.5rem; margin-top: 3rem;">
             No products yet. Add your first product above!
         </p>
-        `
+        `;
+        return;
+    }
+
+    if (filtered.length === 0) {
+        productList.innerHTML = `
+        <p style="text-align:center; color:#777; font-size: 1.5rem; margin-top: 3rem;">
+            No products found matching "<strong>${search.value}</strong>"
+        </p>
+        `;
         return;
     }
 
     let html = "";
-    products.forEach((product, index) => {
-        const isLong = product.name.replaceAll(" ", "").length >= 40;
-        const isUpperCase = product.name === product.name.toUpperCase();
-        let h3Class = "";
-
-        if (isLong && isUpperCase) h3Class = "huge";
-        else if (isLong) h3Class = "long";
-        else if (isUpperCase) h3Class = "upperCase";
+    filtered.forEach((product) => {
+        const index = products.indexOf(product);
 
         html += `
         <div class="product">
-            <h3 class="${h3Class}">${product.name}</h3>
+            <h3>${product.name}</h3>
             <h4>Price: $${Number(product.price).toFixed(2)}</h4>
             <h4>Quantity: ${product.quantity}</h4>
+            <h4>Date: ${product.date || "Unknown"}</h4>
             <button type="button" class="edit" data-index="${index}" aria-label="Edit ${product.name}">Edit</button>
             <button type="button" class="del" data-index="${index}" aria-label="Delete ${product.name}">Delete</button>
         </div>
@@ -105,6 +128,87 @@ function displayProducts() {
 
     productList.innerHTML = html;
 }
+
+//Add product and validate
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const product = {
+        name: productName.value.trim(),
+        price: productPrice.value.trim(),
+        quantity: productQuantity.value.trim(),
+        date: new Date().toLocaleDateString()
+    };
+
+    //validation
+    if (product.name === "" && product.price === "" && product.quantity === "") {
+        validation.textContent = "Please Enter The Product Details";
+        message.textContent = "";
+        productName.setCustomValidity("Please enter a product name");
+        productName.reportValidity();
+        productName.classList.add("invalid");
+        return;
+    }
+
+    if (product.name === "") {
+        validation.textContent = "Please Enter The Product Name";
+        message.textContent = "";
+        productName.setCustomValidity("Please enter a product name");
+        productName.reportValidity();
+        productName.classList.add("invalid");
+        return;
+    } else if (product.price === "") {
+        validation.textContent = "Please Enter The Product Price";
+        message.textContent = "";
+        productPrice.setCustomValidity("Please enter the product price (Decimal)");
+        productPrice.reportValidity();
+        productPrice.classList.add("invalid");
+        return;
+    } else if (product.quantity === "") {
+        validation.textContent = "Please Enter The Product Quantity";
+        message.textContent = "";
+        productQuantity.setCustomValidity("Please enter the product quantity (Integer)");
+        productQuantity.reportValidity();
+        productQuantity.classList.add("invalid");
+        return;
+    }
+
+    //Checks if the item already exists
+    const isDuplicate = products.some((p, i) => p.name.toLowerCase() === product.name.toLowerCase() && i !== editIndex);
+    if (isDuplicate) {
+        validation.textContent = `"${product.name}" already exists`;
+        message.textContent = "";
+        productName.setCustomValidity("This product already exists")
+        productName.reportValidity();
+        productName.classList.add("invalid");
+        return;
+    }
+
+    if (editIndex === null) {
+        products.unshift(product);
+        message.textContent = "Product Added Successfully";
+    } else {
+        products[editIndex] = product;
+        editIndex = null;
+        saveBtn.textContent = "Save Product";
+        message.textContent = "Product Updated Successfully";
+        validation.textContent = "";
+    }
+
+    saveProducts();
+    saveEditIndex(null);
+    displayProducts();
+
+    productName.value = "";
+    productPrice.value = "";
+    productQuantity.value = "";
+
+    validation.textContent = "";
+
+    document.querySelectorAll(".edit, .del").forEach(btn => btn.disabled = false);
+    
+    productName.focus();
+});
 
 //target the edit or the delete button
 productList.addEventListener("click", function (e) {
@@ -169,77 +273,9 @@ function del(index) {
     validation.textContent = "";
 }
 
-//Add product and validate
-form.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const product = {
-        name: productName.value.trim(),
-        price: productPrice.value.trim(),
-        quantity: productQuantity.value.trim()
-    };
-
-    if (product.name == "" && product.price == "" && product.quantity == "") {
-        validation.textContent = "Please Enter The Product Details";
-        message.textContent = "";
-        productName.setCustomValidity("Please enter a product name");
-        productName.reportValidity();
-        productName.classList.add("invalid");
-        return;
-    }
-
-    if (product.name == "") {
-        validation.textContent = "Please Enter The Product Name";
-        message.textContent = "";
-        productName.setCustomValidity("Please enter a product name");
-        productName.reportValidity();
-        productName.classList.add("invalid");
-        return;
-    } else if (product.price == "") {
-        validation.textContent = "Please Enter The Product Price";
-        message.textContent = "";
-        productPrice.setCustomValidity("Please enter the product price (Decimal)");
-        productPrice.reportValidity();
-        productPrice.classList.add("invalid");
-        return;
-    } else if (product.quantity == "") {
-        validation.textContent = "Please Enter The Product Quantity";
-        message.textContent = "";
-        productQuantity.setCustomValidity("Please enter the product quantity (Integer)");
-        productQuantity.reportValidity();
-        productQuantity.classList.add("invalid");
-        return;
-    }
-
-    if (editIndex === null) {
-        products.unshift(product);
-        message.textContent = "Product Added Successfully";
-    } else {
-        products[editIndex] = product;
-        editIndex = null;
-        saveBtn.textContent = "Save Product";
-        message.textContent = "Product Updated Successfully";
-        validation.textContent = "";
-    }
-
-    saveProducts();
-    saveEditIndex(null);
-    displayProducts();
-
-    productName.value = "";
-    productPrice.value = "";
-    productQuantity.value = "";
-
-    validation.textContent = "";
-
-    document.querySelectorAll(".edit, .del").forEach(btn => btn.disabled = false);
-    
-    productName.focus();
-});
-
 //Keyboard navigation
 productName.addEventListener("keydown", function (event) {
-    if (event.code === "Enter") {
+    if (event.key === "Enter") {
         event.preventDefault();
         productPrice.focus();
     }
@@ -248,7 +284,7 @@ productName.addEventListener("keydown", function (event) {
 });
 
 productPrice.addEventListener("keydown", function (event) {
-    if (event.code === "Enter") {
+    if (event.key === "Enter") {
         event.preventDefault();
         productQuantity.focus();
     }
@@ -327,6 +363,12 @@ productQuantity.addEventListener("keydown", function (event) {
     }
 });
 
+search.addEventListener("keydown", function (event) {
+    if (event.key === "<" || event.key === ">") {
+        event.preventDefault();
+    }
+});
+
 productName.addEventListener("input", function () {
     this.value = this.value.replace(/[<>]/g, "");
 });
@@ -348,7 +390,7 @@ productQuantity.addEventListener("input", function () {
 });
 
 //Dark Mode
-let dark = false;
+let dark = true;
 const savedMode = localStorage.getItem("dark");
 
 if (savedMode !== null) {
@@ -389,7 +431,30 @@ skipLink.addEventListener("click", function () {
 });
 
 //shortcuts Modal
-function trapFocus(event) {}
+function trapFocus(event) {
+    if (shortcutsModal.style.display !== "flex") return;
+
+    const focusableElements = modalContent.querySelectorAll(
+        "button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex='-1'])"
+    );
+    
+    if (focusableElements.length === 0) return;
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    
+    if (event.code === "Tab") {
+        if (event.shiftKey && document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
+        }
+    }
+}
+
+document.addEventListener("keydown", trapFocus);
 
 function closeModalWithAnimation() {
     shortcutsModal.classList.add("closing");
@@ -416,6 +481,11 @@ shortcutsModal.addEventListener("click", function (event) {
     if (event.target === shortcutsModal) {
         closeModalWithAnimation();
     }
+});
+
+search.addEventListener("input", function () {
+    this.value = this.value.replace(/[<>]/g, "");
+    displayProducts();
 });
 
 displayProducts();

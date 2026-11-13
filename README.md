@@ -7,7 +7,7 @@ A simple, accessible web app to save and manage products using the browser's loc
 - 🌙 Dark mode with persistence
 - ⌨️ Keyboard shortcuts (`/`, `Alt+R`, `Alt+D`, `Escape`, `?`)
 - 💾 Auto-saves input fields
-- 📱 Fully responsive (mobile, tablet, desktop)  //nearly responsive 😅
+- 📱 Fully responsive (mobile, tablet, desktop)
 - ♿ Accessible (skip link, ARIA labels, focus management)
 
 ## 🔧 Tech Stack

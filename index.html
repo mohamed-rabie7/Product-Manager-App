@@ -40,10 +40,12 @@
                 <p id="message" role="status" aria-live="polite"></p>
             </form>
 
-            <div class="productBox">
+            <section class="productBox">
                 <h2>Products:</h2>
+                <input type="search" id="searchInput" placeholder="Search Products" aria-label="Search Products" maxlength="60" autocomplete="off">
+                
                 <div id="productList"></div>
-            </div>
+            </section>
         </main>
 
         <div id="shortcutsModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">

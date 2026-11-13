@@ -1,5 +1,5 @@
 html {
-    font-size: clamp(0.85rem, 0.49rem + 0.5vw, 1.8rem);
+    font-size: clamp(0.85rem, 0.5rem + 0.5vw, 1.8rem);
 }
 
 body {
@@ -84,19 +84,19 @@ body {
     letter-spacing: 0.1em;
     padding: 0.75em 1.125em;
     cursor: pointer;
-    box-shadow: 0.08em 0.1em 0.375em rgba(0, 0, 0, 0.7);
+    box-shadow: 0.08em 0.1em 0.375em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.4);
     transition: 0.25s ease;
 }
 
 #shortcuts:hover {
     background-color: #153eaa;
-    box-shadow: 0.2em 0.25em 0.7em rgba(0, 0, 0, 0.6);
+    box-shadow: 0.2em 0.25em 0.7em rgba(0, 0, 0, 0.6), 0 0 0.5em rgba(29, 79, 205, 0.5);
     transform: translateY(-0.25em);
 }
 
 #shortcuts:active {
     transform: scale(0.95);
-    box-shadow: 0.08em 0.1em 0.375em rgba(0, 0, 0, 0.7);
+    box-shadow: 0.08em 0.1em 0.375em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.4);
 }
 
 #app {
@@ -155,6 +155,7 @@ input {
     padding: 0.5555em;
     margin-top: 1.125rem;
     font-size: 1.35rem;
+    font-family: inherit;
     border: 0.0555em solid #ccc;
     border-radius: 0.4444em;
 }
@@ -178,7 +179,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input.invalid {
     border-color: #e12;
-    background-color: #fdd;
+    background-color: #fff0f0;
 }
 
 #saveBtn {
@@ -193,7 +194,7 @@ input.invalid {
     letter-spacing: 0.07em !important;
     cursor: pointer;
     transition: 0.25s ease;
-    box-shadow: 0.1em 0.125em 0.375em rgba(0, 0, 0, 0.7);
+    box-shadow: 0.1em 0.125em 0.375em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.4);
     letter-spacing: 0.05em;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
@@ -201,12 +202,12 @@ input.invalid {
 #saveBtn:hover {
     background-color: #153eaa;
     transform: translateY(-0.2em);
-    box-shadow: 0.25em 0.3125em 0.625em rgba(0, 0, 0, 0.6);
+    box-shadow: 0.25em 0.3125em 0.625em rgba(0, 0, 0, 0.6), 0 0 0.5em rgba(29, 79, 205, 0.5);
 }
 
 #saveBtn:active {
-    transform: scale(0.95) translateY(0);
-    box-shadow: 0.125em 0.125em 0.375em rgba(0, 0, 0, 0.7);
+    transform: scale(0.95);
+    box-shadow: 0.125em 0.125em 0.375em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.4);
 }
 
 #messages {
@@ -229,6 +230,14 @@ input.invalid {
     font-weight: bold;
     margin-top: 2.25rem;
     letter-spacing: 0.05em;
+}
+
+#searchInput {
+    width: 80%;
+    min-width: 200px;
+    padding: 0.6em 0.7em;
+    font-size: 1.2rem;
+    font-family: inherit;
 }
 
 .product {
@@ -274,19 +283,19 @@ input.invalid {
     font-family: 'Arimo', Arial, Helvetica, sans-serif;
     letter-spacing: 0.05em;
     cursor: pointer;
-    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7);
+    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.4);
     transition: 0.25s ease;
 }
 
 .edit:hover {
     background-color: #153eaa;
-    box-shadow: 0.2222em 0.2777em 0.5555em rgba(0, 0, 0, 0.6);
+    box-shadow: 0.2222em 0.2777em 0.5555em rgba(0, 0, 0, 0.6), 0 0 0.5em rgba(29, 79, 205, 0.5);
     transform: translateY(-0.2222em);
 }
 
 .edit:active {
     transform: scale(0.95);
-    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7);
+    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.4);
 }
 
 .del {
@@ -301,19 +310,19 @@ input.invalid {
     font-family: 'Arimo', Arial, Helvetica, sans-serif;
     letter-spacing: 0.05em;
     cursor: pointer;
-    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7);
+    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(255, 39, 39, 0.4);
     transition: 0.25s ease;
 }
 
 .del:hover {
     background-color: #d0222d;
-    box-shadow: 0.2222em 0.2777em 0.5555em rgba(0, 0, 0, 0.6);
+    box-shadow: 0.2222em 0.2777em 0.5555em rgba(0, 0, 0, 0.6), rgba(255, 39, 39, 0.5);
     transform: translateY(-0.2222em);
 }
 
 .del:active {
     transform: scale(0.95);
-    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7);
+    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7), rgba(255, 39, 39, 0.4);
 }
 
 .edit:disabled, .del:disabled {
@@ -404,6 +413,7 @@ kbd {
     z-index: 9999;
     justify-content: center;
     align-items: center;
+    cursor: zoom-out;
     backdrop-filter: blur(4px);
     animation: fadeIn 0.25s ease;
 }
@@ -424,12 +434,13 @@ kbd {
     background-color: white;
     padding: 3.5rem;
     border-radius: 1rem;
-    max-width: 600px;
+    max-width: 700px;
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 1rem 1.25rem 3.75rem rgba(0, 0, 0, 0.5);
     position: relative;
+    cursor: auto;
     animation: slideUp 0.3s ease;
 }
 
@@ -601,12 +612,40 @@ body.darkMode #subtitle {
     color: #a0a0a0;
 }
 
-body.darkMode #saveBtn:hover {
-    box-shadow: 0.25em 0.3125em 0.625em rgba(0, 0, 0, 0.75);
+body.darkMode #saveBtn {
+    box-shadow: 0.1em 0.125em 0.375em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.3);
 }
 
-body.darkMode .edit:hover, body.darkMode .del:hover {
-    box-shadow: 0.2222em 0.2777em 0.5555em rgba(0, 0, 0, 0.75);
+body.darkMode #saveBtn:hover {
+    box-shadow: 0.25em 0.3125em 0.625em rgba(0, 0, 0, 0.75), 0 0 0.5em rgba(29, 79, 205, 0.4);
+}
+
+body.darkMode #saveBtn:active {
+    box-shadow: 0.1em 0.125em 0.375em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.3);
+}
+
+body.darkMode .edit {
+    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.3);
+}
+
+body.darkMode .edit:hover {
+    box-shadow: 0.2222em 0.2777em 0.5555em rgba(0, 0, 0, 0.75), 0 0 0.5em rgba(29, 79, 205, 0.4);
+}
+
+body.darkMode .edit:active {
+    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(29, 79, 205, 0.3);
+}
+
+body.darkMode .del {
+    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(255, 39, 39, 0.3);
+}
+
+body.darkMode .del:hover {
+    box-shadow: 0.2222em 0.2777em 0.5555em rgba(0, 0, 0, 0.75), 0 0 0.5em rgba(255, 39, 39, 0.4);
+}
+
+body.darkMode .del:active {
+    box-shadow: 0.1111em 0.1111em 0.3333em rgba(0, 0, 0, 0.7), 0 0 0.5em rgba(255, 39, 39, 0.3);
 }
 
 body.darkMode input {
@@ -624,6 +663,11 @@ body.darkMode input::placeholder {
     color: #a0a0a0;
 }
 
+body.darkMode input.invalid {
+    background-color: #3a2020;
+    border-color: #ff5050;
+}
+
 body.darkMode *:focus-visible {
     outline-color: #4772f4;
 }
@@ -638,6 +682,10 @@ body.darkMode #shortcuts {
 
 body.darkMode #shortcuts:hover {
     box-shadow: 0.375em 0.4375em 0.625em rgba(0, 0, 0, 1), 0 0 0.75em rgba(29, 79, 205, 0.4);
+}
+
+body.darkMode #shortcuts:active {
+    box-shadow: 0.125em 0.125em 0.375em rgba(0, 0, 0, 1), 0 0 0.5em rgba(29, 79, 205, 0.3);
 }
 
 body.darkMode kbd {
@@ -699,4 +747,24 @@ body.darkMode #shortcutsModal #modalFooter kbd {
 body.darkMode #modalFooter {
     border-top-color: #333;
     color: #999;
+}
+
+@media (max-width: 768px) and (pointer: coarse) {
+    #shortcuts, footer {
+        display: none;
+    }
+
+    #toggle {
+        position: absolute;
+    }
+}
+
+@media (max-width: 768px) and (pointer: coarse) and (any-pointer: fine) {
+    #shortcuts, footer {
+        display: block;
+    }
+
+    #toggle {
+        position: absolute;
+    }
 }
