@@ -9,6 +9,7 @@ A simple, accessible web app to save and manage products using the browser's loc
 - 💾 Auto-saves input fields
 - 📱 Fully responsive (mobile, tablet, desktop)
 - ♿ Accessible (skip link, ARIA labels, focus management)
+- 🔎 Search bar with exact match priority
 
 ## 🔧 Tech Stack
 - HTML
