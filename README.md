@@ -32,7 +32,8 @@ A simple, accessible web app to save and manage products using the browser's loc
 - Dark mode with CSS classes
 
 ## 📸 Screenshots
-<img width="1280" height="1024" alt="image" src="https://github.com/user-attachments/assets/7f993963-56ba-4783-b0ff-10c1308da632" />
+<img width="1680" height="1050" alt="image" src="https://github.com/user-attachments/assets/fb13fafc-1903-49c1-8ceb-aeb8dc2e9c4f" />
+
 
 
 ## 🏆 License
